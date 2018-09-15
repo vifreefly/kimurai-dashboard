@@ -1,0 +1,142 @@
+<%= breadcrumbs("/" => "Home", "/runs" => "Runs", "" => @run.id) %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Run #<%= @run.id %></h1>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td><%= @run.id %></td>
+        </tr>
+        <tr>
+          <th>Spider</th>
+          <td>
+            <strong><a href="/spiders/<%= @run.spider_id %>"><%= @run.spider_name %></a></strong>
+          </td>
+        </tr>
+        <tr>
+          <th>Session</th>
+          <td><a href="/sessions/<%= @run.session_id %>"><%= @run.session_id %></a></td>
+        </tr>
+        <tr>
+          <th>Status</th>
+          <td>
+            <%= get_badge(@run.status) %>
+            <% if error = @run.error %>
+              <i>(<%= h(error) %>)</i>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Start time</th>
+          <td><%= @run.start_time %></td>
+        </tr>
+        <tr>
+          <th>Stop time</th>
+          <td><%= @run.stop_time %></td>
+        </tr>
+        <tr>
+          <th>Running time</th>
+          <td><%= @run.running_time.duration %></td>
+        </tr>
+        <tr>
+          <th>Environment</th>
+          <td><%= @run.environment %></td>
+        </tr>
+        <tr>
+          <th>Log file</th>
+          <td>
+            <% if @run.latest? %>
+              <a target="_blank" href="/runs/<%= @run.id %>/log"><%= @run.spider_name %>.log</a>
+            <% else %>
+              Not available
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Server hostname</th>
+          <td><%= @run.server["hostname"] %></td>
+        </tr>
+        <tr>
+          <th>Server IPV4</th>
+          <td><%= @run.server["ipv4"] %></td>
+        </tr>
+        <tr>
+          <th>Process pid</th>
+          <td><%= @run.server["process_pid"] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-12">
+    <h2>Visits</h2>
+    <table class="table table-bordered table-sm">
+      <tbody>
+        <tr>
+          <th>Requests</th>
+          <td>
+            <strong><%= @run.visits["requests"] %></strong>
+            <% if difference %>
+              <i><%= format_difference(difference[:visits][:requests][:previous], difference[:visits][:requests][:difference], difference[:previous_run_id]) %></i>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Responses</th>
+          <td>
+            <strong><%= @run.visits["responses"] %></strong>
+            <% if difference %>
+              <i><%= format_difference(difference[:visits][:responses][:previous], difference[:visits][:responses][:difference], difference[:previous_run_id]) %></i>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-lg-12">
+    <h2>Items</h2>
+    <table class="table table-bordered table-sm">
+      <tbody>
+        <tr>
+          <th>Sent</th>
+          <td>
+            <strong><%= @run.items["sent"] %></strong>
+            <% if difference %>
+              <i><%= format_difference(difference[:items][:sent][:previous], difference[:items][:sent][:difference], difference[:previous_run_id]) %></i>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Processed</th>
+          <td>
+            <strong><%= @run.items["processed"] %></strong>
+            <% if difference %>
+              <i><%= format_difference(difference[:items][:processed][:previous], difference[:items][:processed][:difference], difference[:previous_run_id]) %></i>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-lg-12">
+    <h2>Events</h2>
+    <% if @run.events["requests_errors"]&.any? %>
+      <p class="fancy-hr" id="running">Requests Errors (<%= errors_count(@run.events["requests_errors"]) %>)</p>
+      <%= erb :'runs/_errors', locals: { errors: @run.events["requests_errors"] } %>
+    <% end %>
+
+    <% if @run.events["drop_items_errors"]&.any? %>
+      <p class="fancy-hr" id="running">Drop Items Errors (<%= errors_count(@run.events["drop_items_errors"]) %>)</p>
+      <%= erb :'runs/_errors', locals: { errors: @run.events["drop_items_errors"] } %>
+    <% end %>
+
+    <% if @run.events["custom"]&.any? %>
+      <p class="fancy-hr" id="running">Custom (<%= errors_count(@run.events["custom"]) %>)</p>
+      <%= erb :'runs/_errors', locals: { errors: @run.events["custom"] } %>
+    <% end %>
+  </div>
+</div>
