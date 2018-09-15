@@ -49,7 +49,7 @@ end
 ```
 
 ## Usage
-After successful configuration all spiders (running individually `kimurai start` or in queue `kimurai runner`) will save stats to the database.
+After successful configuration, all spiders (running individually `kimurai start` or in queue `kimurai runner`) will save stats to the database.
 
 Run `$ bundle exec kimurai dashboard` and navigate to a dashboard url to see the stats.
 
