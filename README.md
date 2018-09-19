@@ -1,6 +1,6 @@
 # Kimurai::Dashboard
 
-Simple Dashboard for [Kimurai web scraping framework](https://github.com/vifreefly/kimuraframework). Required version of Kimurai `>= 1.1.1`.
+Simple Dashboard for [Kimurai web scraping framework](https://github.com/vifreefly/kimuraframework). Required version of Kimurai `>= 1.1.0`.
 
 ## Installation
 Add this line to your Kimurai project's Gemfile:
