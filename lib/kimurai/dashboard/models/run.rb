@@ -23,6 +23,14 @@ module Kimurai::Dashboard
       Run.where(spider_name: spider_name).last == self
     end
 
+    def log_file
+      if latest?
+        session ? { available: false, reason: "run is not in session" } : { available: true }
+      else
+        { available: false, reason: "run is not latest" }
+      end
+    end
+
     def difference_between_previous_run
       previous_run = Run.where(spider_name: spider_name).reverse_order(:id).first(Sequel[:id] < id)
       return unless previous_run

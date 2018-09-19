@@ -48,10 +48,10 @@
         <tr>
           <th>Log file</th>
           <td>
-            <% if @run.latest? %>
-              <a target="_blank" href="/runs/<%= @run.id %>/log"><%= @run.spider_name %>.log</a>
+            <% if @run.log_file[:available] == false %>
+              Not available (<%= @run.log_file[:reason] %>)
             <% else %>
-              Not available
+              <a target="_blank" href="/runs/<%= @run.id %>/log"><%= @run.spider_name %>.log</a>
             <% end %>
           </td>
         </tr>

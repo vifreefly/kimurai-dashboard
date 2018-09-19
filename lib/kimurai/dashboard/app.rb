@@ -89,7 +89,7 @@ module Kimurai
 
         get "/:id/log" do
           @run = Run.find(id: params[:id].to_i)
-          halt "Error, can't find session!" unless @run
+          halt "Error, can't find run with id: #{params[:id]}" unless @run
 
           log_name = "./log/#{@run.spider_name}.log"
 

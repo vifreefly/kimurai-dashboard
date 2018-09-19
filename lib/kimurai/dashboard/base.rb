@@ -47,7 +47,7 @@ module Kimurai
       end
     ensure
       task.terminate if task
-      updater.call(final_info) if final_info
+      updater.call(final_info)# if final_info
     end
   end
 end
