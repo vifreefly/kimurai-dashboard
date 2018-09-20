@@ -42,6 +42,7 @@ Kimurai.configure do |config|
   # ...
 
   config.dashboard = {
+    bind_address: "0.0.0.0",
     port: 3001,
     basic_auth: { username: "admin", password: "123456" }
   }

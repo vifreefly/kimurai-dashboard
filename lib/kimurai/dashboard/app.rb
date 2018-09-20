@@ -15,12 +15,17 @@ module Kimurai
       register Sinatra::RespondWith, Sinatra::Namespace
       enable :logging
       set :environment, Kimurai.env.to_sym
+
+      if bind_address = Kimurai.configuration.dashboard&.dig(:bind_address)
+        set :bind, bind_address
+      end
+
       if port = Kimurai.configuration.dashboard&.dig(:port)
         set :port, port
       end
 
       configure :development do
-        # require 'pry'
+        require 'pry'
         register Sinatra::Reloader
       end
 

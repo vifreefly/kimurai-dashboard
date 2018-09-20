@@ -20,12 +20,12 @@ module Kimurai::Dashboard
     end
 
     def latest?
-      Run.where(spider_name: spider_name).last == self
+      Run.where(spider_name: spider_name).last&.id == id
     end
 
     def log_file
       if latest?
-        session ? { available: false, reason: "run is not in session" } : { available: true }
+        session ? { available: true } : { available: false, reason: "run is not in session" }
       else
         { available: false, reason: "run is not latest" }
       end
