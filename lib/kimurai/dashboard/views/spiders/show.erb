@@ -22,17 +22,6 @@
             <% end %>
           </td>
         </tr>
-        <tr>
-          <th>Latest log</th>
-          <td>
-            <% if latest = @spider.runs_dataset.last %>
-              <a target="_blank" href="/runs/<%= latest.id %>/log"><%= latest.spider_name %>.log</a>
-              (run <a href="/runs/<%= latest.id %>">#<%= latest.id %></a>)
-            <% else %>
-              Not available
-            <% end %>
-          </td>
-        </tr>
       </tbody>
     </table>
   </div>

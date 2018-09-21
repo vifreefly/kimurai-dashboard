@@ -16,5 +16,13 @@ module Kimurai::Dashboard
     def current_state
       running? ? "running" : "stopped"
     end
+
+    def latest_run
+      runs_dataset.last
+    end
+
+    def latest_log
+      #
+    end
   end
 end
