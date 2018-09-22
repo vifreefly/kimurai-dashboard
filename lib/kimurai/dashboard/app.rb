@@ -118,13 +118,7 @@ module Kimurai
         end
 
         get "/:id_or_name" do
-          @spider =
-            if params[:id_or_name].match?(/^(\d)+$/)
-              Spider.find(id: params[:id_or_name].to_i)
-            else
-              Spider.find(name: params[:id_or_name])
-            end
-
+          find_spider
           halt "Error, can't find spider!" unless @spider
 
           @spider_runs = @spider.runs_dataset.reverse_order(:id)
@@ -134,9 +128,31 @@ module Kimurai
             f.html { erb :'spiders/show' }
           end
         end
+
+        get "/:id_or_name/log" do
+          find_spider
+          halt "Error, can't find spider!" unless @spider
+
+          log_name = "./log/#{@spider.name}.log"
+          if File.exists?(log_name)
+            content_type 'text/event-stream'
+            File.readlines(log_name)
+          else
+            halt "There is not log file for this spider yet"
+          end
+        end
       end
 
       private
+
+      def find_spider
+        @spider =
+          if params[:id_or_name].match?(/^(\d)+$/)
+            Spider.find(id: params[:id_or_name].to_i)
+          else
+            Spider.find(name: params[:id_or_name])
+          end
+      end
 
       def pagy_get_vars(collection, vars)
         {
