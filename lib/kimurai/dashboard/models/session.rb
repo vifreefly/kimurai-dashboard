@@ -23,15 +23,15 @@ module Kimurai::Dashboard
     end
 
     def running_runs
-      runs_dataset.where(status: "running").all
+      runs_dataset.where(status: "running").order(:id).all
     end
 
     def failed_runs
-      runs_dataset.where(status: "failed").all
+      runs_dataset.where(status: "failed").order(:id).all
     end
 
     def completed_runs
-      runs_dataset.where(status: "completed").all
+      runs_dataset.where(status: "completed").order(:id).all
     end
   end
 end
