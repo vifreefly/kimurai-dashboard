@@ -11,35 +11,35 @@ module Kimurai
 
     DB.create_table?(:sessions) do
       primary_key :id, type: :integer, auto_increment: false
-      string :status
-      datetime :start_time, empty: false
-      datetime :stop_time
-      string :environment
-      integer :concurrent_jobs
-      text :spiders
-      text :error
-    end
-
-    DB.create_table?(:runs) do
-      primary_key :id
-      string :spider_name, empty: false
-      string :status
-      string :environment
-      datetime :start_time, empty: false
-      datetime :stop_time
-      float :running_time
-      foreign_key :session_id, :sessions
-      foreign_key :spider_id, :spiders
-      text :visits
-      text :items
-      text :events
-      text :error
-      text :server
+      String :status
+      Time :start_time, empty: false
+      Time :stop_time
+      String :environment
+      Integer :concurrent_jobs
+      String :spiders, text: true
+      String :error, text: true
     end
 
     DB.create_table?(:spiders) do
       primary_key :id
-      string :name, empty: false, unique: true
+      String :name, empty: false, unique: true
+    end
+
+    DB.create_table?(:runs) do
+      primary_key :id
+      String :spider_name, empty: false
+      String :status
+      String :environment
+      Time :start_time, empty: false
+      Time :stop_time
+      Float :running_time
+      foreign_key :session_id, :sessions
+      foreign_key :spider_id, :spiders
+      String :visits, text: true
+      String :items, text: true
+      String :events, text: true
+      String :error, text: true
+      String :server, text: true
     end
   end
 end
