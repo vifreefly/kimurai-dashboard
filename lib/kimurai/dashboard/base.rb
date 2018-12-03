@@ -7,7 +7,7 @@ module Kimurai
       alias_method :original_crawl!, :crawl!
     end
 
-    def self.crawl!(continue: false, exception_on_fail: true)
+    def self.crawl!(exception_on_fail: true)
       logger.error "Spider: already running: #{name}" and return false if running?
 
       spider = Dashboard::Spider.find_or_create(name: name)
@@ -39,7 +39,7 @@ module Kimurai
         loop { sleep 0.5 and updater.call and sleep 1.5 }
       end
 
-      final_info, error = original_crawl!(continue: continue, exception_on_fail: false)
+      final_info, error = original_crawl!(exception_on_fail: false)
       if error
         exception_on_fail ? raise(error) : [final_info, error]
       else
