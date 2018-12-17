@@ -32,7 +32,6 @@ module Kimurai::Dashboard
     end
 
     def difference_between_previous_run
-      previous_run = Run.where(spider_name: spider_name).reverse_order(:id).first(Sequel[:id] < id)
       return unless previous_run
 
       {
@@ -62,6 +61,10 @@ module Kimurai::Dashboard
         },
         previous_run_id: previous_run.id
       }
+    end
+
+    def previous_run
+      Run.where(spider_name: spider_name).reverse_order(:id).first(Sequel[:id] < id)
     end
 
     private
