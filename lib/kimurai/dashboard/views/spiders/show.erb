@@ -1,4 +1,4 @@
-<%= breadcrumbs("/" => "Home", "/spiders" => "Spiders", "" => @spider.id) %>
+<%= breadcrumbs(root_path => "Home", "#{root_path}spiders" => "Spiders", "" => @spider.id) %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -18,14 +18,14 @@
           <td>
             <%= get_badge(@spider.current_state) %>
             <% if session_id = @spider.current_session&.id %>
-              (active session <a href="/sessions/<%= session_id %>"><%= session_id %></a>)
+              (active session <a href="<%= root_path %>sessions/<%= session_id %>"><%= session_id %></a>)
             <% end %>
           </td>
         </tr>
         <tr>
           <th>Latest log</th>
           <td>
-            <a target="_blank" href="/spiders/<%= @spider.id %>/log"><%= @spider.name %>.log</a>
+            <a target="_blank" href="<%= root_path %>spiders/<%= @spider.id %>/log"><%= @spider.name %>.log</a>
           </td>
         </tr>
       </tbody>

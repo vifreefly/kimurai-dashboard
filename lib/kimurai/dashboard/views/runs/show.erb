@@ -1,4 +1,4 @@
-<%= breadcrumbs("/" => "Home", "/runs" => "Runs", "" => @run.id) %>
+<%= breadcrumbs(root_path => "Home", "#{root_path}runs" => "Runs", "" => @run.id) %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -13,12 +13,12 @@
         <tr>
           <th>Spider</th>
           <td>
-            <strong><a href="/spiders/<%= @run.spider_id %>"><%= @run.spider_name %></a></strong>
+            <strong><a href="<%= root_path %>spiders/<%= @run.spider_id %>"><%= @run.spider_name %></a></strong>
           </td>
         </tr>
         <tr>
           <th>Session</th>
-          <td><a href="/sessions/<%= @run.session_id %>"><%= @run.session_id %></a></td>
+          <td><a href="<%= root_path %>sessions/<%= @run.session_id %>"><%= @run.session_id %></a></td>
         </tr>
         <tr>
           <th>Status</th>
@@ -51,7 +51,7 @@
             <% if @run.log_file[:available] == false %>
               Not available (<%= @run.log_file[:reason] %>)
             <% else %>
-              <a target="_blank" href="/runs/<%= @run.id %>/log"><%= @run.spider_name %>.log</a>
+              <a target="_blank" href="<%= root_path %>runs/<%= @run.id %>/log"><%= @run.spider_name %>.log</a>
             <% end %>
           </td>
         </tr>

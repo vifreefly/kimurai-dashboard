@@ -1,4 +1,4 @@
-<%= breadcrumbs("/" => "Home", "" => "Sessions") %>
+<%= breadcrumbs(root_path => "Home", "" => "Sessions") %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -20,7 +20,7 @@
           <% @sessions.each do |session| %>
             <tr>
               <th scope="row">
-                <a href="/sessions/<%= session.id %>"><%= session.id %></a>
+                <a href="<%= root_path %>sessions/<%= session.id %>"><%= session.id %></a>
               </th>
               <td><%= get_badge(session.status) %></td>
               <td><%= session.start_time %></td>

@@ -17,17 +17,17 @@
       <% runs.each do |run| %>
         <tr>
           <th scope="row">
-            <a href="/runs/<%= run.id %>"><%= run.id %></a>
+            <a href="<%= root_path %>runs/<%= run.id %>"><%= run.id %></a>
           </th>
           <td>
-            <a href="/spiders/<%= run.spider_id %>"><%= run.spider_name %></a>
+            <a href="<%= root_path %>spiders/<%= run.spider_id %>"><%= run.spider_name %></a>
           </td>
           <td><%= get_badge(run.status) %></td>
           <td><%= run.start_time %></td>
           <td><%= run.stop_time %></td>
           <td><%= run.running_time.duration %></td>
           <td>
-            <a href="/sessions/<%= run.session_id %>"><%= run.session_id %></a>
+            <a href="<%= root_path %>sessions/<%= run.session_id %>"><%= run.session_id %></a>
           </td>
           <td><%= minimize_stats(run.visits).join("/") %></td>
           <td><%= minimize_stats(run.items).join("/") %></td>

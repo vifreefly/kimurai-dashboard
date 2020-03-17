@@ -55,7 +55,7 @@ module Kimurai
 
       def format_difference(prev_value, prev_diff, prev_run_id)
         previous =
-          %Q{previous <a href="/runs/#{prev_run_id}">#{prev_value}</a>}
+          %Q{previous <a href="#{root_path}runs/#{prev_run_id}">#{prev_value}</a>}
 
         formatted_diff = begin
           str = prev_diff.to_s
@@ -72,6 +72,10 @@ module Kimurai
 
       def errors_count(hash)
         hash.map { |_, count| count }.sum
+      end
+
+      def root_path
+        "#{env["SCRIPT_NAME"]}/"
       end
     end
   end

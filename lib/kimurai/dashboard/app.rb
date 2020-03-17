@@ -45,7 +45,7 @@ module Kimurai
       ###
 
       get "/" do
-        redirect "/spiders"
+        redirect "#{root_path}spiders"
       end
 
       namespace "/sessions" do

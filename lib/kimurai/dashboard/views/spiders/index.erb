@@ -1,4 +1,4 @@
-<%= breadcrumbs("/" => "Home", "" => "Spiders") %>
+<%= breadcrumbs(root_path => "Home", "" => "Spiders") %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -17,17 +17,17 @@
           <% @spiders.each do |spider| %>
             <tr>
               <th scope="row">
-                <a href="/spiders/<%= spider.id %>"><%= spider.id %></a>
+                <a href="<%= root_path %>spiders/<%= spider.id %>"><%= spider.id %></a>
               </th>
               <td><%= spider.name %></td>
               <td>
                 <%= get_badge(spider.current_state) %>
                 <% if session_id = spider.current_session&.id %>
-                  (active session <a href="/sessions/<%= session_id %>"><%= session_id %></a>)
+                  (active session <a href="<%= root_path %>sessions/<%= session_id %>"><%= session_id %></a>)
                 <% end %>
               </td>
               <td>
-                <a href="/runs?spider_id=<%= spider.id %>"><%= spider.runs.size %></a>
+                <a href="<%= root_path %>runs?spider_id=<%= spider.id %>"><%= spider.runs.size %></a>
               </td>
             </tr>
           <% end %>

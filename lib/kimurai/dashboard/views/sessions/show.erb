@@ -1,4 +1,4 @@
-<%= breadcrumbs("/" => "Home", "/sessions" => "Sessions", "" => @session.id) %>
+<%= breadcrumbs(root_path => "Home", "<%= root_path %>sessions" => "Sessions", "" => @session.id) %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -41,7 +41,7 @@
         </tr>
         <tr>
           <th>Spiders list</th>
-          <td><%= @session.spiders.size %>: <%= convert_to_links(@session.spiders, base: "/spiders").join(", ") %></td>
+          <td><%= @session.spiders.size %>: <%= convert_to_links(@session.spiders, base: "#{root_path}spiders").join(", ") %></td>
         </tr>
       </tbody>
     </table>
@@ -50,7 +50,7 @@
   <% if @session.processing? && queue = @session.spiders_in_queue %>
     <div class="col-lg-12 mb-4">
       <h2>In queue <small class="text-muted"><%= queue.size %></small></h2>
-      <span><%= convert_to_links(queue, base: "/spiders").join(", ") %></span>
+      <span><%= convert_to_links(queue, base: "#{root_path}spiders").join(", ") %></span>
 
       <div class="progress mt-2" style="height: 1px;">
         <div class="progress-bar" role="progressbar" style="width: <%= ((queue.size.to_f / @session.spiders.size) * 100).to_i %>%;">
