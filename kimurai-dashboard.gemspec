@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "kimurai", ">= 1.3.0"
   spec.add_dependency "sequel"
   spec.add_dependency "sinatra-contrib"
-  spec.add_dependency "pagy"
+  spec.add_dependency "pagy", "~> 3.5"
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"

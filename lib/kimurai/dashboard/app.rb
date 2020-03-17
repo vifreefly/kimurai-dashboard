@@ -97,9 +97,10 @@ module Kimurai
           halt "Error, can't find run with id: #{params[:id]}" unless @run
 
           log_name = "./log/#{@run.spider_name}.log"
-
           if @run.latest? && File.exists?(log_name)
             content_type 'text/event-stream'
+            headers['Content-Disposition'] = 'inline'
+
             File.readlines(log_name)
           else
             halt "Log file is not available for this run"
